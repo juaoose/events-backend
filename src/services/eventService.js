@@ -10,7 +10,16 @@ module.exports.updateEvent = async (event) => {
   return result
 }
 
+module.exports.removeEvent = async (eventId) => {
+  const result = await eventRepo.removeEvent(eventId)
+  return result
+}
+
 module.exports.retrieveEvent = async (eventId) => {
   const result = await eventRepo.retrieveEventById(eventId)
-  return result
+  if (result) {
+    return result
+  } else {
+    throw new Error('Event not found')
+  }
 }

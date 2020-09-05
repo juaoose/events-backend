@@ -13,7 +13,7 @@ router.get('/:username', authService.authorize, async (req, res) => {
     var user = await userService.retrieveUser(req.params.username)
     res.status(200).json(user)
   } catch (error) {
-    logger.error('Error retrieving user %o', error)
+    logger.error(error)
     res.status(500).json(error)
   }
 })

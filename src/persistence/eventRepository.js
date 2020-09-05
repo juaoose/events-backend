@@ -17,9 +17,18 @@ module.exports.updateEvent = async (event) => {
 
   if (result && result.rowCount === 1) {
     return { message: 'Event updated' }
-  }
-  else {
+  } else {
     throw new Error('The given event was not updated')
+  }
+}
+
+module.exports.removeEvent = async (eventId) => {
+  logger.info('Removing event %s', eventId)
+  const result = await database.query('DELETE FROM EVENTS WHERE ID = $1', [eventId])
+  if (result && result.rowCount === 1) {
+    return { message: 'Event removed' }
+  } else {
+    throw new Error('The given event was not removed')
   }
 }
 
@@ -32,7 +41,12 @@ module.exports.retrieveEventById = async (eventId) => {
   }
   const event = result.rows.shift()
   return {
-    id: event.id, title: event.title, organizer: event.organizer, max_capacity: event.max_capacity,
-    price: event.price, date: event.date, location: event.location
+    id: event.id,
+    title: event.title,
+    organizer: event.organizer,
+    max_capacity: event.max_capacity,
+    price: event.price,
+    date: event.date,
+    location: event.location
   }
 }

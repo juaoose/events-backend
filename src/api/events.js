@@ -12,13 +12,13 @@ router.get('/:id', async (req, res) => {
     var event = await eventService.retrieveEvent(req.params.id)
     res.status(200).json(event)
   } catch (error) {
-    logger.error('Error retrieving user %o', error)
-    res.status(500).json(error)
+    logger.error(error)
+    res.status(500).json({ message: error.message })
   }
 })
 
 router.post('/', authService.authorize, async (req, res) => {
-  //TODO Missing validations, might want to use Joi or similar tools
+  // TODO Missing validations, might want to use Joi or similar tools
   if (!req.body || !req.body.title) {
     res.status(400).send({ message: 'All event information is required' })
   }
@@ -33,7 +33,7 @@ router.post('/', authService.authorize, async (req, res) => {
 })
 
 router.put('/:id', authService.authorize, async (req, res) => {
-  //TODO Missing validations, might want to use Joi or similar tools
+  // TODO Missing validations, might want to use Joi or similar tools
   if (!req.params.id || !req.body || !req.body.title) {
     res.status(400).send({ message: 'All event information is required' })
   }
@@ -48,6 +48,20 @@ router.put('/:id', authService.authorize, async (req, res) => {
   }
   try {
     const result = await eventService.updateEvent(newEvent)
+    res.status(200).json(result)
+  } catch (error) {
+    logger.error(error)
+    res.status(409).json({ message: error.message })
+  }
+})
+
+router.delete('/:id', authService.authorize, async (req, res) => {
+  if (!req.params.id) {
+    res.status(400).send({ message: 'Event id is required' })
+  }
+
+  try {
+    const result = await eventService.removeEvent(req.params.id)
     res.status(200).json(result)
   } catch (error) {
     logger.error(error)
