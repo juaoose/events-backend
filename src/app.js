@@ -6,7 +6,7 @@ const logger = require('pino')()
 const usersRouter = require('./api/users')
 
 const app = express()
-const port = process.env.APP_PORT
+const port = process.env.PORT || 80
 
 dotenv.config()
 app.use(bodyParser.json())
