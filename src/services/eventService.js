@@ -6,6 +6,7 @@ module.exports.createEvent = async (event) => {
 }
 
 module.exports.updateEvent = async (event) => {
+  console.log(event)
   const result = await eventRepo.updateEvent(event)
   return result
 }
@@ -22,4 +23,9 @@ module.exports.retrieveEvent = async (eventId) => {
   } else {
     throw new Error('Event not found')
   }
+}
+
+module.exports.listEvents = async () => {
+  const result = await eventRepo.retrieveEvents()
+  return result
 }

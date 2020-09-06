@@ -44,9 +44,30 @@ module.exports.retrieveEventById = async (eventId) => {
     id: event.id,
     title: event.title,
     organizer: event.organizer,
-    max_capacity: event.max_capacity,
+    maxCapacity: event.max_capacity,
     price: event.price,
     date: event.date,
     location: event.location
   }
+}
+
+module.exports.retrieveEvents = async () => {
+  logger.info('Looking for events')
+
+  const result = await database.query('SELECT * FROM EVENTS WHERE DATE > CURRENT_TIMESTAMP')
+  if (result.rows && result.rows.length === 0) {
+    return
+  }
+  const events = result.rows.map((event) => {
+    return {
+      id: event.id,
+      title: event.title,
+      organizer: event.organizer,
+      maxCapacity: event.max_capacity,
+      price: event.price,
+      date: event.date,
+      location: event.location
+    }
+  })
+  return events
 }

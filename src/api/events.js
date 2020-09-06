@@ -17,14 +17,31 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.get('/', async (req, res) => {
+  try {
+    var event = await eventService.listEvents(req.params.id)
+    res.status(200).json(event)
+  } catch (error) {
+    logger.error(error)
+    res.status(500).json({ message: error.message })
+  }
+})
+
 router.post('/', authService.authorize, async (req, res) => {
   // TODO Missing validations, might want to use Joi or similar tools
   if (!req.body || !req.body.title) {
     res.status(400).send({ message: 'All event information is required' })
   }
-
+  const newEvent = {
+    title: req.body.title,
+    organizer: req.body.organizer,
+    max_capacity: req.body.maxCapacity,
+    price: req.body.price,
+    date: req.body.date,
+    location: req.body.location
+  }
   try {
-    const event = await eventService.createEvent(req.body)
+    const event = await eventService.createEvent(newEvent)
     res.status(200).json(event)
   } catch (error) {
     logger.error(error)
@@ -41,7 +58,7 @@ router.put('/:id', authService.authorize, async (req, res) => {
     id: req.params.id,
     title: req.body.title,
     organizer: req.body.organizer,
-    max_capacity: req.body.max_capacity,
+    max_capacity: req.body.maxCapacity,
     price: req.body.price,
     date: req.body.date,
     location: req.body.location
