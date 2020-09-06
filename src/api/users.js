@@ -1,22 +1,7 @@
 const express = require('express')
 const userService = require('../services/userService')
-const authService = require('../services/authorizationService')
 const router = express.Router()
 const logger = require('pino')()
-
-// TODO should not show secret and should be for admins only
-router.get('/:username', authService.authorize, async (req, res) => {
-  if (!req.params.username) {
-    res.status(400).send({ message: 'Username is required' })
-  }
-  try {
-    var user = await userService.retrieveUser(req.params.username)
-    res.status(200).json(user)
-  } catch (error) {
-    logger.error(error)
-    res.status(500).json(error)
-  }
-})
 
 router.post('/', async (req, res) => {
   if (!req.body || !req.body.username || !req.body.password) {

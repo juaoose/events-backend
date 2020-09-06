@@ -28,7 +28,6 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', authService.authorize, async (req, res) => {
-  // TODO Missing validations, might want to use Joi or similar tools
   if (!req.body || !req.body.title) {
     res.status(400).send({ message: 'All event information is required' })
   }
@@ -53,7 +52,6 @@ router.post('/', authService.authorize, async (req, res) => {
 })
 
 router.put('/:id', authService.authorize, async (req, res) => {
-  // TODO Missing validations, might want to use Joi or similar tools
   if (!req.params.id || !req.body || !req.body.title) {
     res.status(400).send({ message: 'All event information is required' })
   }

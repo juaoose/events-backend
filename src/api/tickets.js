@@ -6,7 +6,7 @@ const logger = require('pino')()
 
 router.get('/', authService.authorize, async (req, res) => {
   if (!req.query.userId) {
-    res.status(400).send({ message: 'Event id is required' })
+    res.status(400).send({ message: 'User id is required' })
   }
   try {
     var ticket = await ticketService.findTickets(req.query.userId)
@@ -18,9 +18,8 @@ router.get('/', authService.authorize, async (req, res) => {
 })
 
 router.post('/', authService.authorize, async (req, res) => {
-  // TODO missing validations
   if (!req.body || !req.body.eventId || !req.body.buyerId) {
-    res.status(400).send({ message: 'All event information is required' })
+    res.status(400).send({ message: 'All ticket information is required' })
   }
 
   try {
