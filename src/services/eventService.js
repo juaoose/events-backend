@@ -1,4 +1,5 @@
 const eventRepo = require('../persistence/eventRepository')
+const assetsService = require('./assetsService')
 
 module.exports.createEvent = async (event) => {
   const result = await eventRepo.createEvent(event)
@@ -6,7 +7,10 @@ module.exports.createEvent = async (event) => {
 }
 
 module.exports.updateEvent = async (event) => {
-  console.log(event)
+  if (event.encodedImage) {
+    const imageUrl = await assetsService.uploadImage(event.encodedImage)
+    event.image = imageUrl
+  }
   const result = await eventRepo.updateEvent(event)
   return result
 }

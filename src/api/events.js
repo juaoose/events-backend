@@ -39,7 +39,9 @@ router.post('/', authService.authorize, async (req, res) => {
     price: req.body.price,
     date: req.body.date,
     location: req.body.location,
-    description: req.body.description
+    description: req.body.description,
+    image: req.body.image,
+    encodedImage: req.body.encodedImage
   }
   try {
     const event = await eventService.createEvent(newEvent)
@@ -63,7 +65,9 @@ router.put('/:id', authService.authorize, async (req, res) => {
     price: req.body.price,
     date: req.body.date,
     location: req.body.location,
-    description: req.body.description
+    description: req.body.description,
+    image: req.body.image,
+    encodedImage: req.body.encodedImage
   }
   try {
     const result = await eventService.updateEvent(newEvent)
