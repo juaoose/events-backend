@@ -1,4 +1,5 @@
 const eventRepo = require('../persistence/eventRepository')
+const ticketRepo = require('../persistence/ticketRepository')
 const assetsService = require('./assetsService')
 
 module.exports.createEvent = async (event) => {
@@ -20,6 +21,7 @@ module.exports.updateEvent = async (event) => {
 }
 
 module.exports.removeEvent = async (eventId) => {
+  await ticketRepo.removeTickets(eventId)
   const result = await eventRepo.removeEvent(eventId)
   return result
 }

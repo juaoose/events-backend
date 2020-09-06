@@ -20,3 +20,14 @@ module.exports.findTickets = async (userId) => {
   const tickets = result.rows.map((ticket) => { return { id: ticket.id, eventId: ticket.event_id, buyerId: ticket.buyer_user_id } })
   return tickets
 }
+
+module.exports.removeTickets = async (eventId) => {
+  logger.info('Removing tickets related to event %s', eventId)
+  const result = await database.query('DELETE FROM TICKETS WHERE EVENT_ID = $1',
+    [eventId])
+  if (result && result.rowCount >= 0) {
+    return { message: 'Operation successful' }
+  } else {
+    throw new Error('Error removing tickets')
+  }
+}
