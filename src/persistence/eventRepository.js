@@ -1,6 +1,10 @@
 const database = require('../config/database').pool
 const logger = require('pino')()
 
+/**
+ * Creates an event
+ * @param {*} event 
+ */
 module.exports.createEvent = async (event) => {
   logger.info('Creating a new event %s', event.title)
   const result = await database.query('INSERT INTO events (TITLE, ORGANIZER, MAX_CAPACITY, PRICE, DATE, LOCATION, DESCRIPTION, IMAGE) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING ID',
@@ -10,6 +14,10 @@ module.exports.createEvent = async (event) => {
   }
 }
 
+/**
+ * Updates and existing event
+ * @param {*} event 
+ */
 module.exports.updateEvent = async (event) => {
   logger.info('Updating event %s', event.id)
   const result = await database.query('UPDATE EVENTS SET title=$1, organizer=$2, max_capacity=$3, price=$4, date=$5, location=$6, description=$7, image=$8 WHERE id= $9',
@@ -22,6 +30,10 @@ module.exports.updateEvent = async (event) => {
   }
 }
 
+/**
+ * Removes an event given its identifier
+ * @param {*} eventId 
+ */
 module.exports.removeEvent = async (eventId) => {
   logger.info('Removing event %s', eventId)
   const result = await database.query('DELETE FROM EVENTS WHERE ID = $1', [eventId])
@@ -32,6 +44,10 @@ module.exports.removeEvent = async (eventId) => {
   }
 }
 
+/**
+ * Retrieves an event by a specific identifier
+ * @param {*} eventId 
+ */
 module.exports.retrieveEventById = async (eventId) => {
   logger.info('Looking for event with id %s', eventId)
 
@@ -53,6 +69,9 @@ module.exports.retrieveEventById = async (eventId) => {
   }
 }
 
+/**
+ * Retrieves all the events after the current moment
+ */
 module.exports.retrieveEvents = async () => {
   logger.info('Looking for events')
 

@@ -31,7 +31,6 @@ module.exports.retrieveUserByUsername = async (username) => {
   logger.info('Looking for user %s', username)
 
   const result = await database.query('SELECT ID, USERNAME, SECRET, EMAIL, ROLE FROM USERS WHERE USERNAME = $1', [username])
-  // TODO Should I use a different approach for user not being found?
   if (result.rows && result.rows.length === 0) {
     return
   }

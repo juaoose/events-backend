@@ -1,6 +1,10 @@
 const database = require('../config/database').pool
 const logger = require('pino')()
 
+/**
+ * Creates a ticket associated to an event and a user
+ * @param {*} ticket 
+ */
 module.exports.createTicket = async (ticket) => {
   logger.info('User %s is attending %s', ticket.userId, ticket.eventId)
   const result = await database.query('INSERT INTO tickets(event_id, buyer_user_id) VALUES ($1, $2) RETURNING ID',
@@ -10,6 +14,10 @@ module.exports.createTicket = async (ticket) => {
   }
 }
 
+/**
+ * Retrieves tickets associated to a specific user
+ * @param {*} userId 
+ */
 module.exports.findTickets = async (userId) => {
   logger.info('Retrieving tickets for user %s', userId)
   const result = await database.query('SELECT id, event_id, buyer_user_id FROM tickets WHERE BUYER_USER_ID = $1',
@@ -21,6 +29,10 @@ module.exports.findTickets = async (userId) => {
   return tickets
 }
 
+/**
+ * Removes all tickets associated to a specific event
+ * @param {*} eventId 
+ */
 module.exports.removeTickets = async (eventId) => {
   logger.info('Removing tickets related to event %s', eventId)
   const result = await database.query('DELETE FROM TICKETS WHERE EVENT_ID = $1',
