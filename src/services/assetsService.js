@@ -7,7 +7,7 @@ const s3 = new AWS.S3({
 
 /**
  * Uploads a JPEG file to S3
- * @param {*} image 
+ * @param {*} image
  */
 module.exports.uploadImage = async (image) => {
   var base64data = Buffer.from(image, 'binary')

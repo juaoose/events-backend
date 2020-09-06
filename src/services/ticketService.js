@@ -2,7 +2,7 @@ const ticketRepo = require('../persistence/ticketRepository')
 
 /**
  * Creates a ticket, resembling a purchase operation
- * @param {*} subscription 
+ * @param {*} subscription
  */
 module.exports.createTicket = async (subscription) => {
   const result = await ticketRepo.createTicket(subscription)
@@ -11,7 +11,7 @@ module.exports.createTicket = async (subscription) => {
 
 /**
  * Retrieves all the tickets that a user has
- * @param {*} userId 
+ * @param {*} userId
  */
 module.exports.findTickets = async (userId) => {
   const result = await ticketRepo.findTickets(userId)

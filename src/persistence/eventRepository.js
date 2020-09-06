@@ -3,7 +3,7 @@ const logger = require('pino')()
 
 /**
  * Creates an event
- * @param {*} event 
+ * @param {*} event
  */
 module.exports.createEvent = async (event) => {
   logger.info('Creating a new event %s', event.title)
@@ -16,7 +16,7 @@ module.exports.createEvent = async (event) => {
 
 /**
  * Updates and existing event
- * @param {*} event 
+ * @param {*} event
  */
 module.exports.updateEvent = async (event) => {
   logger.info('Updating event %s', event.id)
@@ -32,7 +32,7 @@ module.exports.updateEvent = async (event) => {
 
 /**
  * Removes an event given its identifier
- * @param {*} eventId 
+ * @param {*} eventId
  */
 module.exports.removeEvent = async (eventId) => {
   logger.info('Removing event %s', eventId)
@@ -46,7 +46,7 @@ module.exports.removeEvent = async (eventId) => {
 
 /**
  * Retrieves an event by a specific identifier
- * @param {*} eventId 
+ * @param {*} eventId
  */
 module.exports.retrieveEventById = async (eventId) => {
   logger.info('Looking for event with id %s', eventId)

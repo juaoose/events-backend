@@ -3,7 +3,7 @@ const logger = require('pino')()
 
 /**
  * Creates a ticket associated to an event and a user
- * @param {*} ticket 
+ * @param {*} ticket
  */
 module.exports.createTicket = async (ticket) => {
   logger.info('User %s is attending %s', ticket.userId, ticket.eventId)
@@ -16,7 +16,7 @@ module.exports.createTicket = async (ticket) => {
 
 /**
  * Retrieves tickets associated to a specific user
- * @param {*} userId 
+ * @param {*} userId
  */
 module.exports.findTickets = async (userId) => {
   logger.info('Retrieving tickets for user %s', userId)
@@ -31,7 +31,7 @@ module.exports.findTickets = async (userId) => {
 
 /**
  * Removes all tickets associated to a specific event
- * @param {*} eventId 
+ * @param {*} eventId
  */
 module.exports.removeTickets = async (eventId) => {
   logger.info('Removing tickets related to event %s', eventId)

@@ -4,7 +4,7 @@ const assetsService = require('./assetsService')
 
 /**
  * Creates an event, this includes handling the upload process of the bytes sent by the consumer
- * @param {*} event 
+ * @param {*} event
  */
 module.exports.createEvent = async (event) => {
   if (event.encodedImage) {
@@ -17,7 +17,7 @@ module.exports.createEvent = async (event) => {
 
 /**
  * Updates a given event, if a new image is sent, upload is handled
- * @param {*} event 
+ * @param {*} event
  */
 module.exports.updateEvent = async (event) => {
   if (event.encodedImage) {
@@ -30,7 +30,7 @@ module.exports.updateEvent = async (event) => {
 
 /**
  * Removes an event and all the related tickets
- * @param {*} eventId 
+ * @param {*} eventId
  */
 module.exports.removeEvent = async (eventId) => {
   await ticketRepo.removeTickets(eventId)
@@ -40,7 +40,7 @@ module.exports.removeEvent = async (eventId) => {
 
 /**
  * Retrieves a specific event given its identifier
- * @param {*} eventId 
+ * @param {*} eventId
  */
 module.exports.retrieveEvent = async (eventId) => {
   const result = await eventRepo.retrieveEventById(eventId)
