@@ -38,7 +38,8 @@ router.post('/', authService.authorize, async (req, res) => {
     max_capacity: req.body.maxCapacity,
     price: req.body.price,
     date: req.body.date,
-    location: req.body.location
+    location: req.body.location,
+    description: req.body.description
   }
   try {
     const event = await eventService.createEvent(newEvent)
@@ -61,7 +62,8 @@ router.put('/:id', authService.authorize, async (req, res) => {
     max_capacity: req.body.maxCapacity,
     price: req.body.price,
     date: req.body.date,
-    location: req.body.location
+    location: req.body.location,
+    description: req.body.description
   }
   try {
     const result = await eventService.updateEvent(newEvent)

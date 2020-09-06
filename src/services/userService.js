@@ -13,7 +13,7 @@ module.exports.authenticateUser = async (authInformation) => {
   const secretsMatch = await bcrypt.compare(authInformation.password, user.password)
   if (secretsMatch) {
     const token = generateJwt(user)
-    return { token: token }
+    return { id: user.id, username: user.username, token: token }
   } else {
     throw new Error('Incorrect login information')
   }
