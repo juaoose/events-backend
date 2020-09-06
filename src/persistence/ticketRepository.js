@@ -10,10 +10,10 @@ module.exports.createTicket = async (ticket) => {
   }
 }
 
-module.exports.findTickets = async (userId, eventId) => {
-  logger.info('Retrieving tickets for user %s to event %s', userId, eventId)
-  const result = await database.query('SELECT id, event_id, buyer_user_id, name, birth_date FROM tickets WHERE EVENT_ID = $1 AND BUYER_USER_ID = $2',
-    [eventId, userId])
+module.exports.findTickets = async (userId) => {
+  logger.info('Retrieving tickets for user %s', userId)
+  const result = await database.query('SELECT id, event_id, buyer_user_id, name, birth_date FROM tickets WHERE BUYER_USER_ID = $1',
+    [userId])
   if (result.rows && result.rows.length === 0) {
     return
   }

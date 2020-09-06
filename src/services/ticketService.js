@@ -5,8 +5,8 @@ module.exports.createTicket = async (subscription) => {
   return result
 }
 
-module.exports.findTickets = async (userId, eventId) => {
-  const result = await ticketRepo.findTickets(userId, eventId)
+module.exports.findTickets = async (userId) => {
+  const result = await ticketRepo.findTickets(userId)
   if (result) {
     return result
   } else {

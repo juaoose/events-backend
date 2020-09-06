@@ -5,11 +5,11 @@ const router = express.Router()
 const logger = require('pino')()
 
 router.get('/', authService.authorize, async (req, res) => {
-  if (!req.query.userId || !req.query.eventId) {
+  if (!req.query.userId) {
     res.status(400).send({ message: 'Event id is required' })
   }
   try {
-    var ticket = await ticketService.findTickets(req.query.userId, req.query.eventId)
+    var ticket = await ticketService.findTickets(req.query.userId)
     res.status(200).json(ticket)
   } catch (error) {
     logger.error(error)
