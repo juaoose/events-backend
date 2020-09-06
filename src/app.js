@@ -11,7 +11,7 @@ const app = express()
 const port = process.env.PORT || 80
 
 dotenv.config()
-app.use(bodyParser.json({limit: '5mb'}))
+app.use(bodyParser.json({ limit: '5mb' }))
 app.use(cors())
 
 // Add routers

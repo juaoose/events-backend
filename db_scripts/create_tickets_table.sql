@@ -1,17 +1,18 @@
+-- Table: public.tickets
 
-CREATE TABLE public.TICKETS
+-- DROP TABLE public.tickets;
+
+CREATE TABLE public.tickets
 (
-    ID bigserial NOT NULL,
-    EVENT_ID bigint NOT NULL ,
-    BUYER_USER_ID bigint NOT NULL,
-    NAME character varying COLLATE pg_catalog."default" NOT NULL,
-    BIRTH_DATE date NOT NULL,
-    CONSTRAINT tickets_pkey PRIMARY KEY (ID),
-    CONSTRAINT EVENT_ID FOREIGN KEY (EVENT_ID)
+    id bigint NOT NULL DEFAULT nextval('tickets_id_seq'::regclass),
+    event_id bigint NOT NULL,
+    buyer_user_id bigint NOT NULL,
+    CONSTRAINT tickets_pkey PRIMARY KEY (id),
+    CONSTRAINT event_id FOREIGN KEY (event_id)
         REFERENCES public.events (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    CONSTRAINT USER_ID FOREIGN KEY (BUYER_USER_ID)
+    CONSTRAINT user_id FOREIGN KEY (buyer_user_id)
         REFERENCES public.users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION

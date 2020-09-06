@@ -1,13 +1,19 @@
-CREATE TABLE public.EVENTS
+-- Table: public.events
+
+-- DROP TABLE public.events;
+
+CREATE TABLE public.events
 (
-    ID bigserial NOT NULL,
-    TITLE character varying COLLATE pg_catalog."default" NOT NULL,
-    ORGANIZER character varying COLLATE pg_catalog."default" NOT NULL,
-    MAX_CAPACITY bigint,
-    PRICE numeric(12, 2) NOT NULL,
-    DATE timestamp with time zone NOT NULL,
-    LOCATION character varying COLLATE pg_catalog."default",
-    CONSTRAINT events_pkey PRIMARY KEY (ID)
+    id bigint NOT NULL DEFAULT nextval('events_id_seq'::regclass),
+    title character varying COLLATE pg_catalog."default" NOT NULL,
+    organizer bigint NOT NULL,
+    max_capacity bigint NOT NULL,
+    price numeric(12,2) NOT NULL,
+    date timestamp with time zone NOT NULL,
+    location character varying COLLATE pg_catalog."default" NOT NULL,
+    image character varying COLLATE pg_catalog."default" NOT NULL DEFAULT 'https://cdn.vuetifyjs.com/images/cards/road.jpg'::character varying,
+    description character varying COLLATE pg_catalog."default" NOT NULL DEFAULT 'Default description'::character varying,
+    CONSTRAINT events_pkey PRIMARY KEY (id)
 )
 
 TABLESPACE pg_default;
