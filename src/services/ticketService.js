@@ -16,8 +16,8 @@ module.exports.createTicket = async (subscription) => {
 module.exports.findTickets = async (userId) => {
   const result = await ticketRepo.findTickets(userId)
   if (result) {
-    return result
+    return { tickets: result }
   } else {
-    throw new Error('Event not found')
+    return { tickets: [] }
   }
 }

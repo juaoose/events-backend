@@ -56,5 +56,8 @@ module.exports.retrieveEvent = async (eventId) => {
  */
 module.exports.listEvents = async () => {
   const result = await eventRepo.retrieveEvents()
-  return result
+  if (result) {
+    return { events: result }
+  }
+  return { events: [] }
 }
