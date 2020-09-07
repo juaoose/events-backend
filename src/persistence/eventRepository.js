@@ -75,7 +75,7 @@ module.exports.retrieveEventById = async (eventId) => {
 module.exports.retrieveEvents = async () => {
   logger.info('Looking for events')
 
-  const result = await database.query('SELECT * FROM EVENTS WHERE DATE > CURRENT_TIMESTAMP')
+  const result = await database.query('SELECT * FROM EVENTS WHERE DATE > CURRENT_TIMESTAMP ORDER BY DATE ASC')
   if (result.rows && result.rows.length === 0) {
     return
   }
